@@ -8,6 +8,7 @@ var ono = require('./ono');
 var pre = require('./pre');
 var ver = require('./ver');
 var pro = require('./pro');
+var nbr = require('./nbr');
 
 module.exports = {
     all: {
@@ -19,6 +20,7 @@ module.exports = {
         ono,
         pre,
         ver,
-        pro
+        pro,
+        nbr
     }
 }

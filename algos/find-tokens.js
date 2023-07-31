@@ -19,7 +19,16 @@ module.exports = function(_that) {
             // Iterating through words from corpus
             // We compare to either the word with special chars or not
             wordsAsObj.forEach(function(wordObj, index) {
-                if (wordDict[dicWord] === wordObj.word) {
+                if (typeof wordDict === "function" && wordDict(wordObj.word) !== false) {
+                    taggedObjs.push({
+                        id: wordObj.id,
+                        word: wordObj.word,
+                        lemma: wordDict(wordObj.word).lemma,
+                        pos: wordDict(wordObj.word).pos,
+                    });
+                    wordsAsObj[index].tagged = true;
+                }
+                else if (wordDict[dicWord] === wordObj.word) {
                     taggedObjs.push({
                         id: wordObj.id,
                         word: wordObj.word,
@@ -43,5 +52,5 @@ module.exports = function(_that) {
         });
       }
     });
-    return Helpers.orderByObjId(Helpers.removeDuplicateObjects(taggedObjs));
+    return Helpers.orderByObjId(taggedObjs);
 };
